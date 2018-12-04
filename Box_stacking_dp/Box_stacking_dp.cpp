@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <Windows.h>
 #include <cmath>
+#include <algorithm>
 #define scale pow(10,3)
 #define mxn 50000 //mxn is the maximum possible number of boxes
 
@@ -115,18 +116,24 @@ void box_stacking_dp() //dp algorithm
 void input(int h, int w, int d) //3 possibilities for every box
 {
 	Box box;
+	w = max(w, d);
+	d = min(w, d);
 	box.h = h;
 	box.w = w;
 	box.d = d;
 	box.area = box.w * box.d;
 	b[cntr++] = box;
 
+	h = max(h, d);
+	d = min(h, d);
 	box.h = w;
 	box.w = h;
 	box.d = d;
 	box.area = box.w * box.d;
 	b[cntr++] = box;
 
+	w = max(w, h);
+	d = min(w, h);
 	box.h = d;
 	box.w = h;
 	box.d = w;
